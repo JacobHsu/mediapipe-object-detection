@@ -10,6 +10,7 @@
 // limitations under the License.
 import { ObjectDetector, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.2";
 const demosSection = document.getElementById("demos");
+const videoBlendShapes = document.getElementById("video-blend-shapes");
 let objectDetector;
 let runningMode = "IMAGE";
 // Initialize the object detector
@@ -215,5 +216,8 @@ function displayVideoDetections(result) {
         // Store drawn objects in memory so they are queued to delete at next call.
         children.push(highlighter);
         children.push(p);
+
+        let htmlMaker = Math.round(parseFloat(detection.categories[0].score) * 100) > 70 ? detection.categories[0].categoryName : '“Is anyone here?”' ; 
+        videoBlendShapes.innerHTML = htmlMaker;
     }
 }
